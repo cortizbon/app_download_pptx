@@ -197,10 +197,12 @@ def heatmap_function(df, transformed=False, num_days=7):
     filt = filter_days(data, num_days=num_days).copy()
   else:
     filt = df.copy()
-  fig, ax = plt.subplots(4, 4, figsize=(24.14, 5.68))
+
+  
   langs = data['language'].unique()
+  fig, ax = plt.subplots(4, len(langs), figsize=(24.14, 5.68))
   for i in range(4):
-    for j in range(4):
+    for j in range(len(langs)):
       filtro = filt[filt['language'] == langs[j]]
       filtro = (filtro.groupby('date').agg({'secs_reviewing_attempt':'mean',
                           'ticket_id':'count',
