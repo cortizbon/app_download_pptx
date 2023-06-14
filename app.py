@@ -24,7 +24,7 @@ if uploaded_file is not None:
                                                             "Upload Date",
                                                             "Review Start",
                                                             "Review Finish",
-                                                            "Ticket ID"])
+                                                            "Ticket ID"]).dropna()
     st.dataframe(df)
 
 #download file
