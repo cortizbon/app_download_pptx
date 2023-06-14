@@ -31,7 +31,6 @@ def create_cmap(*colors):
 
 def transformation(dataframe):
   df = dataframe.copy()
-  df.dropna(inplace=True)
   df.columns = df.columns.str.lower().str.replace(' ', '_').str.replace("'",'')
   df['assignee'] = df['reviewers_email'].str.split("@").str[0]
   df = df.dropna(subset=["reviewers_email"]).reset_index(drop=True)
@@ -258,6 +257,7 @@ def number_reviewers(df):
   return filt['assignee'].nunique()
 
 def report(df):
+  df.dropna(inplace=True)
   tabla = top_reviewers(df, transformed=False, col_group='language', num_days=7)
   barplot_function(df, transformed=False, num_days=7)
   heatmap_function(df, transformed=False, num_days=7)
