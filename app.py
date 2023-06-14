@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-import plotly
 from utils import report, create_cmap, dict_langs2
 
 st.title("Template app")
