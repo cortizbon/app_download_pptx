@@ -31,6 +31,7 @@ def create_cmap(*colors):
 
 def transformation(dataframe):
   df = dataframe.copy()
+  df.dropna(inplace=True)
   df.columns = df.columns.str.lower().str.replace(' ', '_').str.replace("'",'')
   df['assignee'] = df['reviewers_email'].str.split("@").str[0]
   df = df.dropna(subset=["reviewers_email"]).reset_index(drop=True)
