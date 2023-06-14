@@ -1,0 +1,6 @@
+streamlit
+pandas
+python-pptx
+numpy
+seaborn
+dataframe_image
