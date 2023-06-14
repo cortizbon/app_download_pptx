@@ -257,7 +257,7 @@ def number_reviewers(df):
   return filt['assignee'].nunique()
 
 def report(df):
-  df.dropna(inplace=True)
+  df = df.dropna()
   tabla = top_reviewers(df, transformed=False, col_group='language', num_days=7)
   barplot_function(df, transformed=False, num_days=7)
   heatmap_function(df, transformed=False, num_days=7)
