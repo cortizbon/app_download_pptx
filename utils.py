@@ -217,7 +217,7 @@ def heatmap_function(df, transformed=False, num_days=7):
         lista_cols.append(pd.DataFrame(filtro[column]).T)
 
       cbar=True
-      if j != 3:
+      if j != len(langs) - 1:
         cbar = False
 
       if i == 0:
