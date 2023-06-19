@@ -39,6 +39,7 @@ try:
                     data = binary_output.getvalue(),
                     file_name = 'my_power.pptx')
     
-except NameError:
+except NameError as e:
+    st.write(e)
     st.warning("Load data from Iterations info in doublecloud")
 
