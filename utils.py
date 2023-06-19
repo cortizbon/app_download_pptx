@@ -359,3 +359,4 @@ def report(df):
   prs.save(binary_output)
   return binary_output 
 
+cmap, cmap2 = create_cmap("#025464", "#E57C23", "#E8AA42", "#F8F1F1")
