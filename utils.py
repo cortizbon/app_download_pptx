@@ -264,7 +264,6 @@ def report(df):
   barplot_function(df, transformed=False, num_days=7)
   heatmap_function(df, transformed=False, num_days=7)
   filas_tabla = tabla.shape[0]
-  cols_tabla = int(len(tabla.columns) / 2)
 
 
   prs = Presentation()
@@ -341,13 +340,12 @@ def report(df):
 
   pic = slide.shapes.add_picture('./bar_plot.png', left, top, width=width, height=height)
 
-  left_table = (transform_inches(12.8) - (1.15 * cols_tabla)) / 2
-  left = Inches(transform_inches(0.65 + 0.65 + 10.75) + left_table)
+  left = Inches(transform_inches(0.65 + 0.65 + 10.75))
   top_table = (8.03 - (1 + (0.5 * filas_tabla))) / 2
   top = Inches(transform_inches(0.65 + 0.65 + 1.08 + 0.9 + top_table))
   
   height = Inches(transform_inches(1 + 0.5 * filas_tabla))
-  width = Inches(0.29 + (1.28 * cols_tabla))
+  width = Inches(transform_inches(12.8))
   pic = slide.shapes.add_picture('./table_language.png', left, top, width=width, height=height)
 
   left = Inches(transform_inches(0.65))
