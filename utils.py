@@ -341,7 +341,7 @@ def report(df):
 
   pic = slide.shapes.add_picture('./bar_plot.png', left, top, width=width, height=height)
 
-  left_table = (transform_inches(12.8) - (1.28 * cols_tabla)) / 2
+  left_table = (transform_inches(12.8) - (1.15 * cols_tabla)) / 2
   left = Inches(transform_inches(0.65 + 0.65 + 10.75) + left_table)
   top_table = (8.03 - (1 + (0.5 * filas_tabla))) / 2
   top = Inches(transform_inches(0.65 + 0.65 + 1.08 + 0.9 + top_table))
