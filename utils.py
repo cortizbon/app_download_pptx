@@ -112,7 +112,7 @@ def heatmap_function(df, transformed=False, num_days=7):
   #plt.subplots_adjust(wspace=0.05, hspace=0.2)
 
   fig.savefig("heatmap.png", bbox_inches='tight')
-  plt.show()
+
 
 def barplot_function(df, transformed=False, num_days=7):
   if not transformed:
@@ -121,6 +121,7 @@ def barplot_function(df, transformed=False, num_days=7):
   else:
     filt = df.copy()
 
+  filt = filt[filt['attempt_status'] == 'approved']
   fig, ax = plt.subplots(1, 1, figsize=(10.75, 8.03))
   pivot = filt.pivot_table(index='date', columns='language', values='ticket_id', aggfunc='count')
   pivot_2 = filt.pivot_table(index='date', values='assignee', aggfunc='nunique')
@@ -131,19 +132,23 @@ def barplot_function(df, transformed=False, num_days=7):
   ax.set_ylabel('# projects')
   ax.set_title("Number of projects solved in last 7 days", size=20)
 
+  unique_dates = filt['date'].nunique()
+  unique_langs = filt['language'].nunique()
+  
+  top_number = (unique_langs - 1) * unique_dates
   contador = 0
   for p in ax.patches:
       width, height = p.get_width(), p.get_height()
       x, y = p.get_xy()
       if height != 0:
         height = int(height)
-        if contador > 17:
+        if contador >= top_number:
           ax.text(x + width / 2, y + height / 2, height, ha='center', va='center', color='white', size=14)
         else:
           ax.text(x + width / 2, y + height / 2, height, ha='center', va='center', size=14)
       contador += 1
 
-  plt.show()
+
 
 
   fig.savefig('bar_plot.png', bbox_inches='tight')
@@ -252,7 +257,7 @@ def heatmap_function(df, transformed=False, num_days=7):
   #plt.subplots_adjust(wspace=0.05, hspace=0.2)
 
   fig.savefig("heatmap.png", bbox_inches='tight')
-  plt.show()
+
 
 def number_reviewers(df):
   data = transformation(df.copy())
@@ -265,6 +270,7 @@ def report(df):
   barplot_function(df, transformed=False, num_days=7)
   heatmap_function(df, transformed=False, num_days=7)
   filas_tabla = tabla.shape[0]
+  cols_tabla = int(len(tabla.columns) / 2)
 
 
   prs = Presentation()
@@ -341,12 +347,13 @@ def report(df):
 
   pic = slide.shapes.add_picture('./bar_plot.png', left, top, width=width, height=height)
 
-  left = Inches(transform_inches(0.65 + 0.65 + 10.75))
+  left_table = (transform_inches(12.8) - (0.29 + 1.28 * cols_tabla)) / 2 #en pulgadas
+  left = Inches(transform_inches(0.65 + 0.65 + 10.75) + left_table)
   top_table = (8.03 - (1 + (0.5 * filas_tabla))) / 2
   top = Inches(transform_inches(0.65 + 0.65 + 1.08 + 0.9 + top_table))
   
   height = Inches(transform_inches(1 + 0.5 * filas_tabla))
-  width = Inches(transform_inches(12.8))
+  width = Inches(0.29 + 1.28 * cols_tabla)
   pic = slide.shapes.add_picture('./table_language.png', left, top, width=width, height=height)
 
   left = Inches(transform_inches(0.65))
@@ -361,3 +368,5 @@ def report(df):
   return binary_output 
 
 cmap, cmap2 = create_cmap("#025464", "#E57C23", "#E8AA42", "#F8F1F1")
+#cmap, cmap2 = create_cmap("#125B50", "#F8B400", "#FAF5E4", "#FF6363")
+#cmap, cmap2 = create_cmap("#00425A", "#1F8A70", "#BFDB38", "#FC7300")
