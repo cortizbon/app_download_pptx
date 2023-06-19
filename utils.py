@@ -200,8 +200,8 @@ def heatmap_function(df, transformed=False, num_days=7):
 
   
   langs = data['language'].unique()
-  len_langs = len(langs) if len(langs) != 1 else 2
-  fig, ax = plt.subplots(4, len_langs, figsize=(24.14, 5.68))
+
+  fig, ax = plt.subplots(4, len(langs), figsize=(24.14, 5.68))
   for i in range(4):
     for j in range(len(langs)):
       filtro = filt[filt['language'] == langs[j]]
