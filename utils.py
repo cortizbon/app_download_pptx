@@ -123,6 +123,7 @@ def barplot_function(df, transformed=False, num_days=7):
 
   filt = filt[filt['attempt_status'] == 'approved']
   fig, ax = plt.subplots(1, 1, figsize=(10.75, 8.03))
+  
   pivot = filt.pivot_table(index='date', columns='language', values='ticket_id', aggfunc='count')
   pivot_2 = filt.pivot_table(index='date', values='assignee', aggfunc='nunique')
   pivot.plot(kind='bar', stacked=True, cmap=cmap2, ax=ax)
