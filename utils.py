@@ -198,7 +198,7 @@ def heatmap_function(df, transformed=False, num_days=7):
   else:
     filt = df.copy()
 
-  
+  len_langs = len(langs) if len(langs) != 1 else 2
   langs = data['language'].unique()
   fig, ax = plt.subplots(4, len(langs), figsize=(24.14, 5.68))
   for i in range(4):
@@ -359,4 +359,3 @@ def report(df):
   prs.save(binary_output)
   return binary_output 
 
-cmap, cmap2 = create_cmap("#025464", "#E57C23", "#E8AA42", "#F8F1F1")
