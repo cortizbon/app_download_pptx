@@ -52,68 +52,6 @@ def filter_days(df, col="date", num_days=7):
   filt = df[df[col] >= (datetime.today() - pd.to_timedelta(num_days, "D"))]
   return filt.reset_index(drop=True)
 
-
-
-def heatmap_function(df, transformed=False, num_days=7):
-  if not transformed:
-    data = transformation(df).copy()
-    filt = filter_days(data, num_days=num_days).copy()
-  else:
-    filt = df.copy()
-  fig, ax = plt.subplots(5, 4, figsize=(transform_inches(24.14), transform_inches(5.68)))
-  langs = data['language'].unique()
-  for i in range(5):
-    for j in range(4):
-      filtro = filt[filt['language'] == langs[j]]
-      filtro = (filtro.groupby('date').agg({'secs_reviewing_attempt':'mean',
-                          'ticket_id':'count',
-                          'sla_issue':'sum'}))
-      filtro['time'] = np.ceil(filtro['secs_reviewing_attempt'] / 3600)
-      filtro.drop(columns='secs_reviewing_attempt', inplace=True)
-      filtro['perc_sla'] = filtro['sla_issue'] / filtro['ticket_id']
-      filtro.columns = ['revs_made', 'sla_issues', 'avg_time_per_review (hrs)', 'sla_perc_revs_made']
-      filtro = filtro[['avg_time_per_review (hrs)','revs_made', 'sla_issues','sla_perc_revs_made']]
-      lista_cols = []
-      for column in filtro.columns:
-        lista_cols.append(pd.DataFrame(filtro[column]).T)
-
-      cbar=True
-      if j != 3:
-        cbar = False
-
-      if i == 0:
-        sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='.0f',  vmin=0, vmax=24, cmap=cmap, cbar=cbar)
-        ax[i, j].set_title(langs[j])
-      elif i == 1:
-        sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='.0f',  vmin=0, vmax=8, cmap=cmap2, cbar=cbar)
-      elif i == 2:
-        sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='.0f',  vmin=0, vmax=2, cmap=cmap, cbar=cbar)
-      else:
-        sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='0.1%',  vmin=0, vmax=0.2, cmap=cmap, cbar=cbar)
-
-      ticks_x = []
-      if i != 3:
-        ax[i, j].set_xticks([])
-      else:
-        ax[i, j].set_xticklabels(pd.to_datetime(lista_cols[i].columns).strftime('%d-%b'))
-
-      if j != 0:
-        ax[i, j].set_yticks([])
-
-      else:
-        ax[i, j].tick_params(axis='y', rotation=0, left=False)
-      ax[i, j].set_xlabel('')
-  fig.suptitle("Reviewers performance", size=16)
-
-
-  # cmap red, green, yellow
-
-  plt.tight_layout()
-  #plt.subplots_adjust(wspace=0.05, hspace=0.2)
-
-  fig.savefig("heatmap.png", bbox_inches='tight')
-
-
 def barplot_function(df, transformed=False, num_days=7):
   if not transformed:
     data = transformation(df).copy()
@@ -208,6 +146,8 @@ def heatmap_function(df, transformed=False, num_days=7):
   langs = data['language'].unique()
 
   fig, ax = plt.subplots(4, len(langs), figsize=(24.14, 5.68))
+  if len(langs) == 1:
+    ax = ax.reshape(-1, 1)
   for i in range(4):
     for j in range(len(langs)):
       filtro = filt[filt['language'] == langs[j]]
