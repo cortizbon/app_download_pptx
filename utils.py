@@ -279,7 +279,7 @@ def report(df):
 
   fill = shape.fill
   fill.solid()
-  fill.fore_color.rgb = RGBColor(2, 84, 100)
+  fill.fore_color.rgb = RGBColor(18, 91, 80)
 
   #plots
   left = Inches(transform_inches(0.65))
@@ -309,6 +309,6 @@ def report(df):
   prs.save(binary_output)
   return binary_output 
 
-cmap, cmap2 = create_cmap("#025464", "#E57C23", "#E8AA42", "#F8F1F1")
-#cmap, cmap2 = create_cmap("#125B50", "#F8B400", "#FAF5E4", "#FF6363")
+#cmap, cmap2 = create_cmap("#025464", "#E57C23", "#E8AA42", "#F8F1F1")
+cmap, cmap2 = create_cmap("#125B50", "#F8B400", "#FAF5E4", "#FF6363")
 #cmap, cmap2 = create_cmap("#00425A", "#1F8A70", "#BFDB38", "#FC7300")
