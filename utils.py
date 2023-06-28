@@ -42,11 +42,12 @@ def transformation(dataframe):
 
   df['date'] = pd.to_datetime(df['review_finish'].dt.date)
   df['week'] = df["date"].dt.to_period('W').dt.start_time
-  df['ticket_id'] = df['ticket_id'].astype('int64')
+  #df['ticket_id'] = df['ticket_id'].astype('int64')
   df['lang_reg'] = df['language'].str.lower()
   df['language'] = df['language'].str.extract(pat="(\w+)(?: \- \w+)")[0].str.lower()
   df['language'] = df['language'].map(dict_langs2)
-  return df.reset_index(drop=True)
+  df.drop(columns='ticket_id', inplace=True)
+  return df.reset_index(drop=True).reset_index().rename(columns={'index':'ticket_id'})
 
 def filter_days(df, col="date", num_days=7):
   filt = df[df[col] >= (datetime.today() - pd.to_timedelta(num_days, "D"))]
@@ -206,7 +207,7 @@ def number_reviewers(df):
   return filt['assignee'].nunique()
 
 def report(df):
-  df = df.dropna()
+  df = df.dropna(subset=["Reviewer's Email"])
   tabla = top_reviewers(df, transformed=False, col_group='language', num_days=7)
   barplot_function(df, transformed=False, num_days=7)
   heatmap_function(df, transformed=False, num_days=7)

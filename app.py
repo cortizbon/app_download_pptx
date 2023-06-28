@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from utils import report, create_cmap, dict_langs2
+from utils import report, create_cmap, dict_langs2, transformation
 
 st.title("Template app")
 
@@ -24,8 +24,10 @@ if uploaded_file is not None:
                                                             "Upload Date",
                                                             "Review Start",
                                                             "Review Finish",
-                                                            "Ticket ID"]).dropna()
+                                                            "Ticket ID"]).dropna(subset="Reviewer's Email")
     st.dataframe(df)
+    data = transformation(df)
+    st.dataframe(data)
 
 #download file
 try:
