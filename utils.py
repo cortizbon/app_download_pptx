@@ -310,5 +310,5 @@ def report(df):
   return binary_output 
 
 #cmap, cmap2 = create_cmap("#025464", "#E57C23", "#E8AA42", "#F8F1F1")
-#cmap, cmap2 = create_cmap("#125B50", "#F8B400", "#FAF5E4", "#FF6363")
-cmap, cmap2 = create_cmap("#00425A", "#1F8A70", "#BFDB38", "#FC7300")
+cmap, cmap2 = create_cmap("#125B50", "#F8B400", "#FAF5E4", "#FF6363")
+#cmap, cmap2 = create_cmap("#00425A", "#1F8A70", "#BFDB38", "#FC7300")
