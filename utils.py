@@ -256,7 +256,7 @@ def report(df):
 
   fill = shape.fill
   fill.solid()
-  fill.fore_color.rgb = RGBColor(2, 84, 100)
+  fill.fore_color.rgb = RGBColor(0, 66, 90)
 
 
   left = Inches(transform_inches(10.75 + 0.65 + 0.65 + 6.11 + 0.65))
@@ -279,7 +279,7 @@ def report(df):
 
   fill = shape.fill
   fill.solid()
-  fill.fore_color.rgb = RGBColor(18, 91, 80)
+  fill.fore_color.rgb = RGBColor(0, 66, 90)
 
   #plots
   left = Inches(transform_inches(0.65))
