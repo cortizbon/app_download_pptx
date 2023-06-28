@@ -169,7 +169,7 @@ def heatmap_function(df, transformed=False, num_days=7):
         cbar = False
 
       if i == 0:
-        sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='.0f',  vmin=0, vmax=24, cmap=cmap, cbar=cbar, annot_kws={'fontsize': 15})
+        sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='.0f',  vmin=12, vmax=24, cmap=cmap, cbar=cbar, annot_kws={'fontsize': 15})
         ax[i, j].set_title(langs[j], size=14)
       elif i == 1:
         sns.heatmap(lista_cols[i], ax=ax[i, j], annot=True, fmt='.0f',  vmin=0, vmax=8, cmap=cmap2, cbar=cbar, annot_kws={'fontsize': 15})
