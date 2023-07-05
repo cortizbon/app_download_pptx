@@ -70,7 +70,7 @@ def barplot_function(df, transformed=False, num_days=7):
   ax.spines['top'].set_visible(False)
   ax.spines['right'].set_visible(False)
   ax.set_ylabel('# projects')
-  ax.set_title("Number of projects solved in last 7 days", size=20)
+  ax.set_title("Number of solved projects in the last 7 days", size=20)
 
   unique_dates = filt['date'].nunique()
   unique_langs = filt['language'].nunique()
@@ -190,7 +190,7 @@ def heatmap_function(df, transformed=False, num_days=7):
       else:
         ax[i, j].tick_params(axis='y', rotation=0, left=False, labelsize=14)
       ax[i, j].set_xlabel('')
-  fig.suptitle("Reviewers performance", size=20)
+  fig.suptitle("Reviewers' performance", size=20)
 
 
   # cmap red, green, yellow
@@ -239,7 +239,7 @@ def report(df):
   txBox = slide.shapes.add_textbox(left, top, width, height)
   tf = txBox.text_frame
   p = tf.add_paragraph()
-  p.text = "Information about code reviewers performance."
+  p.text = "Information about code reviewers' performance."
   p.font.size = Pt(9)
   p.font.bold = True
 
